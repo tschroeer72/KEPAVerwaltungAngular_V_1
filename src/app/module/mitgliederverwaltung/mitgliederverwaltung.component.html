@@ -3,8 +3,8 @@
         <div class="col col-3">
             <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
                 <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-                  <button id="btnNodeItem" mat-button (click)="logNode(node)">Select</button>
-                  {{node.item}}
+                  <button id="btnNodeItem" mat-button (click)="logNode(node)">{{node.item}}</button>
+                  <!-- {{node.item}} -->
                 </mat-tree-node>
 
                 <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
