@@ -1,1 +1,33 @@
-<p>mitgliederverwaltung works!</p>
+<div class="container-fluid text-center">
+    <div class="row">
+        <div class="col col-3">
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                  <button id="btnNodeItem" mat-button (click)="logNode(node)">Select</button>
+                  {{node.item}}
+                </mat-tree-node>
+
+                <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                  <button id="btnNodeIcon" mat-icon-button
+                          [attr.aria-label]="'Toggle ' + node.item" matTreeNodeToggle>
+                    <mat-icon class="mat-icon-rtl-mirror">
+                      {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                    </mat-icon>
+                  </button>
+                  {{node.item}}
+                    <!-- <button id="btnNodeNode" mat-button (click)="logNode(node)">
+                      {{node.item}}
+                    </button> -->
+                  @if (node.isLoading) {
+                    <mat-progress-bar mode="indeterminate" class="tree-progress-bar"></mat-progress-bar>
+                  }
+                </mat-tree-node>
+              </mat-tree>
+        </div>
+        <div class="col col-9">
+            <p>mitgliederverwaltung works!</p>
+        </div>
+    </div>
+</div>
+
+
