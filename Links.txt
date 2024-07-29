@@ -1,0 +1,18 @@
+https://angular.dev/guide
+
+https://material.angular.io/
+
+https://fonts.google.com/icons
+
+https://ng-bootstrap.github.io/
+
+https://getbootstrap.com/docs/5.2
+
+https://tailwindcss.com/docs/guides/angular
+
+https://www.npmjs.com/package/@fullcalendar/angular  <=>  https://fullcalendar.io/docs/angular
+
+https://angular.dev/guide/ngmodules/lazy-loading
+
+https://github.com/ganatan/angular-react-lazy-loading
+
