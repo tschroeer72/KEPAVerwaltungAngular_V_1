@@ -10,6 +10,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     MitgliederverwaltungRoutingModule,
-    MatTreeModule, MatButtonModule, MatIconModule, MatProgressBarModule, MatCardModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule
+    MatTreeModule, MatButtonModule, MatIconModule, MatProgressBarModule, MatCardModule, MatFormFieldModule, MatInputModule, 
+    FormsModule, ReactiveFormsModule, MatTabsModule
   ]
 })
 export class MitgliederverwaltungModule { }

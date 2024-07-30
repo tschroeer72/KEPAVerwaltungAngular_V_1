@@ -29,13 +29,6 @@ export class MitgliederserviceService {
  */
 @Injectable({providedIn: 'root'})
 export class DynamicDatabase {
-  // dataMap = new Map<string, string[]>([
-  //   ['A (1)', ['Albrecht, Reinhard']],
-  //   ['R (1)', ['Roßmann, Jürgen']],
-  //   ['S (3)', ['Schmidt, Rainer', 'Schmidt, Wolfgang', 'Schröer, Thorsten' ]],
-  // ]);
-
-  // rootLevelNodes: string[] = ['A (1)', 'R (1)', 'S (3)'];
   rootLevelNodes: ITVData[] = [
     { ID: 1,
       Vorname: '',
@@ -87,7 +80,9 @@ export class DynamicDatabase {
         ID: 8,
         Vorname: 'Thorsten',
         Nachname: 'Schröer',
-        Display: 'Schröer, Thorsten' 
+        Display: 'Schröer, Thorsten',
+        Notizen: 'Testnotiz',
+        Bemerkungen: 'Testbemerkung'
       }]],
   ]);
 

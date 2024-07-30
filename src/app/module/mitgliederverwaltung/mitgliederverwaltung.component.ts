@@ -10,18 +10,24 @@ import { MitgliederserviceService, DynamicDataSource } from '../../services/mitg
   styleUrl: './mitgliederverwaltung.component.scss'
 })
 export class MitgliederverwaltungComponent {
-  mitgliederForm: FormGroup;
+  mitgliederPersoenlichesForm: FormGroup;
+  mitgliederNotizenForm: FormGroup;
   treeControl: FlatTreeControl<DynamicFlatNode>;
   dataSource: DynamicDataSource;
   hasChild = (_: number, _nodeData: DynamicFlatNode) => _nodeData.expandable;
   isExpandable = (node: DynamicFlatNode) => node.expandable;
 
   constructor(private mitgliederService: MitgliederserviceService){
-      this.mitgliederForm = new FormGroup({
+      this.mitgliederPersoenlichesForm = new FormGroup({
       ID: new FormControl(),
       Vorname: new FormControl(''),
       Nachname: new FormControl(''),
       Display: new FormControl('')
+    });
+
+    this.mitgliederNotizenForm = new FormGroup({
+      Notizen: new FormControl(''),
+      Bemerkungen: new FormControl('')
     });
 
     this.treeControl = mitgliederService.treeControl;
@@ -30,6 +36,7 @@ export class MitgliederverwaltungComponent {
 
   logNode(node:DynamicFlatNode){
     console.log(node.item)
-    this.mitgliederForm.patchValue(node.item);
+    this.mitgliederPersoenlichesForm.patchValue(node.item);
+    this.mitgliederNotizenForm.patchValue(node.item);
   }
 }

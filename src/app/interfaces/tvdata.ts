@@ -2,7 +2,9 @@ export interface ITVData {
     ID: number,
     Vorname: string,
     Nachname: string,
-    Display: string
+    Display: string,
+    Notizen?: string,
+    Bemerkungen?: string
 }
 
 /** Flat node with expandable and level information */
