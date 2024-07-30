@@ -3,11 +3,13 @@ import {CollectionViewer, SelectionChange, DataSource} from '@angular/cdk/collec
 import {BehaviorSubject, merge, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FlatTreeControl} from '@angular/cdk/tree';
+import { ITVData } from '../../interfaces/itvdata';
+import {FormControl, FormGroup} from '@angular/forms';
 
 /** Flat node with expandable and level information */
 export class DynamicFlatNode {
   constructor(
-    public item: string,
+    public item: ITVData,
     public level = 1,
     public expandable = false,
     public isLoading = false,
@@ -20,24 +22,78 @@ export class DynamicFlatNode {
  */
 @Injectable({providedIn: 'root'})
 export class DynamicDatabase {
-  dataMap = new Map<string, string[]>([
-    ['A (1)', ['Albrecht, Reinhard']],
-    ['R (1)', ['Roßmann, Jürgen']],
-    ['S (3)', ['Schmidt, Rainer', 'Schmidt, Wolfgang', 'Schröer, Thorsten' ]],
-  ]);
+  // dataMap = new Map<string, string[]>([
+  //   ['A (1)', ['Albrecht, Reinhard']],
+  //   ['R (1)', ['Roßmann, Jürgen']],
+  //   ['S (3)', ['Schmidt, Rainer', 'Schmidt, Wolfgang', 'Schröer, Thorsten' ]],
+  // ]);
 
-  rootLevelNodes: string[] = ['A (1)', 'R (1)', 'S (3)'];
+  // rootLevelNodes: string[] = ['A (1)', 'R (1)', 'S (3)'];
+  rootLevelNodes: ITVData[] = [
+    { ID: 1,
+      Vorname: '',
+      Nachname: '',
+      Display: 'A (1)'
+    },
+    {
+      ID: 2,
+      Vorname: '',
+      Nachname: '',
+      Display: 'R (1)'
+    },
+    { 
+      ID: 3,
+      Vorname: '',
+      Nachname: '',
+      Display: 'S (3)'
+    }];
+  
+  dataMap = new Map<ITVData, ITVData[]>([
+    [this.rootLevelNodes[0], [
+      {
+        ID: 4,
+        Vorname: 'Reinhard',
+        Nachname: 'Albrecht',
+        Display: 'Albrecht, Reinhard'
+      }]],
+    [this.rootLevelNodes[1], [
+      {
+        ID: 5,
+        Vorname: 'Jürgen',
+        Nachname: 'Roßmann',
+        Display: 'Roßmann, Jürgen'
+      }]],
+    [this.rootLevelNodes[2], [
+      {
+        ID: 6,
+        Vorname: 'Rainer',
+        Nachname: 'Schmidt',
+        Display: 'Schmidt, Rainer'
+      },
+      {
+        ID: 7,
+        Vorname: 'Wolfgang',
+        Nachname: 'Schmidt',
+        Display: 'Schmidt, Wolfgang'
+      },
+      { 
+        ID: 8,
+        Vorname: 'Thorsten',
+        Nachname: 'Schröer',
+        Display: 'Schröer, Thorsten' 
+      }]],
+  ]);
 
   /** Initial data from database */
   initialData(): DynamicFlatNode[] {
     return this.rootLevelNodes.map(name => new DynamicFlatNode(name, 0, true));
   }
 
-  getChildren(node: string): string[] | undefined {
+  getChildren(node: ITVData): ITVData[] | undefined {
     return this.dataMap.get(node);
   }
 
-  isExpandable(node: string): boolean {
+  isExpandable(node: ITVData): boolean {
     return this.dataMap.has(node);
   }
 }
@@ -128,25 +184,31 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
     }, 1000);
   }
 }
-
-
-
 @Component({
   selector: 'app-mitgliederverwaltung',
   templateUrl: './mitgliederverwaltung.component.html',
   styleUrl: './mitgliederverwaltung.component.scss'
 })
 export class MitgliederverwaltungComponent {
+  mitgliederForm: FormGroup;
+
   constructor(database: DynamicDatabase) {
     this.treeControl = new FlatTreeControl<DynamicFlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new DynamicDataSource(this.treeControl, database);
 
     this.dataSource.data = database.initialData();
+
+    this.mitgliederForm = new FormGroup({
+      ID: new FormControl(),
+      Vorname: new FormControl(''),
+      Nachname: new FormControl(''),
+      Display: new FormControl('')
+    });
   }
 
-
-  logNode(node:any){
-    console.log(node)
+  logNode(node:DynamicFlatNode){
+    console.log(node.item)
+    this.mitgliederForm.patchValue(node.item);
   }
 
   treeControl: FlatTreeControl<DynamicFlatNode>;

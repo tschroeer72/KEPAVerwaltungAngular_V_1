@@ -1,31 +1,61 @@
 <div class="container-fluid text-center">
-    <div class="row">
+    <div class="row gx-2">
         <div class="col col-3">
-            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-                <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-                  <button id="btnNodeItem" mat-button (click)="logNode(node)">{{node.item}}</button>
-                  <!-- {{node.item}} -->
-                </mat-tree-node>
+            <mat-card appearance="outlined" class="p-1">
+                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                        <button id="btnNodeItem" mat-button (click)="logNode(node)">{{node.item.Display}}</button>
+                        <!-- {{node.item}} -->
+                    </mat-tree-node>
 
-                <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
-                  <button id="btnNodeIcon" mat-icon-button
-                          [attr.aria-label]="'Toggle ' + node.item" matTreeNodeToggle>
-                    <mat-icon class="mat-icon-rtl-mirror">
-                      {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                    </mat-icon>
-                  </button>
-                  {{node.item}}
-                    <!-- <button id="btnNodeNode" mat-button (click)="logNode(node)">
-                      {{node.item}}
-                    </button> -->
-                  @if (node.isLoading) {
-                    <mat-progress-bar mode="indeterminate" class="tree-progress-bar"></mat-progress-bar>
-                  }
-                </mat-tree-node>
+                    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                        <button id="btnNodeIcon" mat-icon-button
+                                [attr.aria-label]="'Toggle ' + node.item" matTreeNodeToggle>
+                            <mat-icon class="mat-icon-rtl-mirror">
+                            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                            </mat-icon>
+                        </button>
+                        {{node.item.Display}}
+                            <!-- <button id="btnNodeNode" mat-button (click)="logNode(node)">
+                            {{node.item.Display}}
+                            </button> -->
+                        @if (node.isLoading) {
+                            <mat-progress-bar mode="indeterminate" class="tree-progress-bar"></mat-progress-bar>
+                        }
+                    </mat-tree-node>
               </mat-tree>
+            </mat-card>
         </div>
         <div class="col col-9">
-            <p>mitgliederverwaltung works!</p>
+            <mat-card appearance="outlined">
+                <mat-card-header class="mb-2">  
+                    <mat-card-title>Mitglied-Details</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <form novalidate [formGroup]="mitgliederForm">
+                        <div class="row">
+                            <mat-form-field class="col-2" appearance="outline">
+                                <mat-label>ID</mat-label>
+                                <input matInput placeholder="ID" formControlName="ID">
+                              </mat-form-field>
+                            <mat-form-field class="col-5" appearance="outline">
+                                <mat-label>Vorname</mat-label>
+                                <input matInput placeholder="Vorname" formControlName="Vorname">
+                              </mat-form-field>
+                            <mat-form-field class="col-5" appearance="outline">
+                                <mat-label>Nachname</mat-label>
+                                <input matInput placeholder="Nachname" formControlName="Nachname">
+                              </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <mat-label>Display</mat-label>
+                                <input matInput placeholder="Display" formControlName="Display">
+                                </mat-form-field>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
         </div>
     </div>
 </div>
