@@ -9,10 +9,10 @@ export interface ITVData {
 
 /** Flat node with expandable and level information */
 export class DynamicFlatNode {
-    constructor(
-      public item: ITVData,
-      public level = 1,
-      public expandable = false,
-      public isLoading = false,
-    ) {}
-  }
+  constructor(
+    public item: ITVData,
+    public level = 1,
+    public expandable = false,
+    public isLoading = false,
+  ) {}
+}

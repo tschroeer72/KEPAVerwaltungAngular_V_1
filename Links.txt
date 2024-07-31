@@ -16,3 +16,4 @@ https://angular.dev/guide/ngmodules/lazy-loading
 
 https://github.com/ganatan/angular-react-lazy-loading
 
+https://www.ag-grid.com/angular-data-grid/getting-started
