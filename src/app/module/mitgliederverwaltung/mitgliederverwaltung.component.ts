@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import { DynamicFlatNode } from '../../interfaces/tvdata';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { MitgliederserviceService, DynamicDataSource } from '../../services/mitgliederservice.service';
 
 @Component({
@@ -19,9 +19,9 @@ export class MitgliederverwaltungComponent {
 
   constructor(private mitgliederService: MitgliederserviceService){
       this.mitgliederPersoenlichesForm = new FormGroup({
-      ID: new FormControl(),
-      Vorname: new FormControl(''),
-      Nachname: new FormControl(''),
+      ID: new FormControl({value: '', disabled: true}),
+      Vorname: new FormControl('', [Validators.required]),
+      Nachname: new FormControl('', [Validators.required]),
       Display: new FormControl('')
     });
 
@@ -30,13 +30,26 @@ export class MitgliederverwaltungComponent {
       Bemerkungen: new FormControl('')
     });
 
+    // this.mitgliederPersoenlichesForm.disable();
+    // this.mitgliederNotizenForm.disable();
+
+    this.mitgliederPersoenlichesForm.controls['ID'].disable();
+    this.mitgliederPersoenlichesForm.controls['Vorname'].disable();
+    this.mitgliederPersoenlichesForm.controls['Nachname'].disable();
+    this.mitgliederPersoenlichesForm.controls['Display'].disable();
+
+    this.mitgliederNotizenForm.controls['Notizen'].disable();
+    this.mitgliederNotizenForm.controls['Bemerkungen'].disable();
+
     this.treeControl = mitgliederService.treeControl;
     this.dataSource = mitgliederService.dataSource;
   }
 
-  logNode(node:DynamicFlatNode){
+  tvShowSelectedNode(node:DynamicFlatNode){
     console.log(node.item)
     this.mitgliederPersoenlichesForm.patchValue(node.item);
     this.mitgliederNotizenForm.patchValue(node.item);
+
+    //this.mitgliederPersoenlichesForm.enable();
   }
 }
