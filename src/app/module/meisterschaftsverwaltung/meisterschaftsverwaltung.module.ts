@@ -7,9 +7,14 @@ import { MeisterschaftsverwaltungComponent } from './meisterschaftsverwaltung.co
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
-//import { ColDef } from 'ag-grid-community'; // Column Definition Type Interface
+import { WjGridModule, WjFlexGrid } from '@mescius/wijmo.angular2.grid';
 
 @NgModule({
   declarations: [
@@ -17,10 +22,13 @@ import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
   ],
   imports: [
     CommonModule, DatePipe,
+    FormsModule, ReactiveFormsModule,
     MeisterschaftsverwaltungRoutingModule,
-    MatTableModule,MatCardModule,MatGridListModule,
+    MatTableModule,MatCardModule,MatGridListModule,MatTabsModule,MatIconModule,MatButtonModule,MatFormFieldModule,MatInputModule,
 
-    AgGridAngular
+    WjGridModule
   ]
 })
-export class MeisterschaftsverwaltungModule { }
+export class MeisterschaftsverwaltungModule { 
+  
+}

@@ -65,7 +65,7 @@ export class MeisterschaftserviceService {
 
   constructor() { }
 
-  GetMeisterschaftsliste():IMeisterschaftenliste[]{
+  public GetMeisterschaftsliste():IMeisterschaftenliste[]{
 
     return this.liste;
   }
