@@ -8,16 +8,7 @@ export interface IMeisterschaftenliste {
     Aktiv: number
 }
 
-// export interface Tile {
-//     cols: number;
-//     rows: number;
-//     text: string;
-// }
-  
-// export class Tile {
-//     constructor(
-//         public cols: number,
-//         public rows: number,
-//         public text: string
-//     ) {}
-// }
+export interface IMeisterschaftstyp{
+    ID: number,
+    Meisterschaftstyp: string
+}

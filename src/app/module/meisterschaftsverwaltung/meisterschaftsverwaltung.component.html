@@ -43,14 +43,14 @@
             
             <mat-card appearance="outlined" class="p-1">
                 <!-- ['ID', 'Bezeichnung', 'Beginn', 'Ende', 'MeisterschaftstypID', 'Meisterschaftstyp', 'Aktiv']; -->
-                <wj-flex-grid #fgMeisterschaften [itemsSource]="data" style="height: 90vh;" (initialized)="init()" (selectionChanged)="selectedRow()"> 
+                <wj-flex-grid #fgMeisterschaften [itemsSource]="data" (initialized)="init()" (selectionChanged)="selectedRow()"> 
                     <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Bezeichnung'" [binding]="'Bezeichnung'" ></wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Beginn'" [binding]="'Beginn'" format="dd.MM.yyyy" ></wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Ende'" [binding]="'Ende'" format="dd.MM.yyyy"></wj-flex-grid-column> 
+                    <wj-flex-grid-column [header]="'Bezeichnung'" [binding]="'Bezeichnung'" [align]="'left'" ></wj-flex-grid-column> 
+                    <wj-flex-grid-column [header]="'Beginn'" [binding]="'Beginn'" format="dd.MM.yyyy"  [align]="'left'"></wj-flex-grid-column> 
+                    <wj-flex-grid-column [header]="'Ende'" [binding]="'Ende'" format="dd.MM.yyyy" [align]="'left'"></wj-flex-grid-column> 
                     <wj-flex-grid-column [header]="'MeisterschaftstypID'" [binding]="'MeisterschaftstypID'" [visible]="false" ></wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Meisterschaftstyp'" [binding]="'Meisterschaftstyp'" ></wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Aktiv'" [binding]="'Aktiv'" ></wj-flex-grid-column> 
+                    <wj-flex-grid-column [header]="'Meisterschaftstyp'" [binding]="'Meisterschaftstyp'" [align]="'left'" ></wj-flex-grid-column> 
+                    <wj-flex-grid-column [header]="'Aktiv'" [binding]="'Aktiv'" [align]="'left'"></wj-flex-grid-column> 
                 </wj-flex-grid>            
             </mat-card>
         </div>
@@ -65,7 +65,7 @@
                                 <div class="mt-3">
                                     <form novalidate [formGroup]="meisterschaftdetailsForm">
                                         <div class="row">
-                                            <mat-form-field class="col col-1" appearance="outline">
+                                            <mat-form-field class="col col-2" appearance="outline">
                                                 <mat-label>ID</mat-label>
                                                 <input matInput placeholder="ID" formControlName="ID">
                                             </mat-form-field>
@@ -73,25 +73,34 @@
                                                 <mat-label>Bezeichnung</mat-label>
                                                 <input matInput placeholder="Bezeichnung" formControlName="Bezeichnung">
                                             </mat-form-field>
-                                            <mat-form-field class="col col-1" appearance="outline">
-                                                <mat-label>Aktiv</mat-label>
-                                                <input matInput placeholder="Aktiv" formControlName="Aktiv">
-                                            </mat-form-field>
+                                            <div class="col col-1" >
+                                                <!-- <mat-label>Aktiv</mat-label> -->
+                                                <!-- <input matInput placeholder="Aktiv" formControlName="Aktiv"> -->
+                                                <mat-checkbox formControlName="Aktiv">Aktiv</mat-checkbox>
+                                            </div>
                                         </div>
                                         <div class="row">
-                                            <mat-form-field class="col col-3" appearance="outline">
+                                            <mat-form-field class="col col-4" appearance="outline">
                                                 <mat-label>Beginn</mat-label>
-                                                <input matInput placeholder="Beginn" formControlName="Beginn">
+                                                <input matInput [matDatepicker]="pickerBeginn" formControlName="Beginn">
+                                                <mat-datepicker-toggle matIconSuffix [for]="pickerBeginn"></mat-datepicker-toggle>
+                                                <mat-datepicker #pickerBeginn></mat-datepicker>
                                             </mat-form-field>
-                                            <mat-form-field class="col col-3" appearance="outline">
+                                            <mat-form-field class="col col-4" appearance="outline">
                                                 <mat-label>Ende</mat-label>
-                                                <input matInput placeholder="Ende" formControlName="Ende">
+                                                <input matInput [matDatepicker]="pickerEnde" formControlName="Ende">
+                                                <mat-datepicker-toggle matIconSuffix [for]="pickerEnde"></mat-datepicker-toggle>
+                                                <mat-datepicker #pickerEnde></mat-datepicker>
                                             </mat-form-field>
                                         </div>
                                         <div class="row">
-                                            <mat-form-field class="col col-5" appearance="outline">
+                                            <mat-form-field class="col col-7" appearance="outline">
                                                 <mat-label>Meisterschaftstyp</mat-label>
-                                                <input matInput placeholder="Meisterschaftstyp" formControlName="MeisterschaftstypID">
+                                                <mat-select [formControl]="typControl" name="MeisterschaftstypID">
+                                                    @for (typ of meisterschaftstypen; track typ) {
+                                                      <mat-option [value]="typ.ID">{{typ.Meisterschaftstyp}}</mat-option>
+                                                    }
+                                                  </mat-select>
                                             </mat-form-field>                                            
                                         </div>
                                     </form>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IMeisterschaftenliste } from '../interfaces/imeisterschaftenliste';
+import { IMeisterschaftenliste, IMeisterschaftstyp } from '../interfaces/imeisterschaftenliste';
 
 // const Liste:IMeisterschaftenliste[] = [
 //   {
@@ -35,7 +35,8 @@ import { IMeisterschaftenliste } from '../interfaces/imeisterschaftenliste';
   providedIn: 'root'
 })
 export class MeisterschaftserviceService {
-  liste:IMeisterschaftenliste[] = [{
+  lstMeisterschaften:IMeisterschaftenliste[] = [
+  {
     ID: 1,
     Bezeichnung: 'Testmeisterschaft 1',
     Beginn: new Date(2023, 0, 1),
@@ -63,10 +64,28 @@ export class MeisterschaftserviceService {
     Aktiv: 1
   }];
 
+  lstTypen:IMeisterschaftstyp[] = [
+    {
+      ID: 1,
+      Meisterschaftstyp: 'Meisterschaft'
+    },
+    {
+      ID: 2,
+      Meisterschaftstyp: 'Blitztunier'
+    },
+    {
+      ID: 3,
+      Meisterschaftstyp: 'Kombimeisterschaft'
+    }
+  ];
+
   constructor() { }
 
   public GetMeisterschaftsliste():IMeisterschaftenliste[]{
+    return this.lstMeisterschaften;
+  }
 
-    return this.liste;
+  public GetMeisterschaftstypen():IMeisterschaftstyp[]{
+    return this.lstTypen;
   }
 }
