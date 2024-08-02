@@ -4,6 +4,7 @@ import {CollectionViewer, SelectionChange, DataSource} from '@angular/cdk/collec
 import {BehaviorSubject, merge, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FlatTreeControl} from '@angular/cdk/tree';
+import { IMitglieder } from '../interfaces/imitglieder';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,51 @@ export class MitgliederserviceService {
     this.dataSource = new DynamicDataSource(this.treeControl, database);
     this.dataSource.data = database.initialData();
    }
+
+   public GetAktiveMitglieder():IMitglieder[]{
+    let lstMitglieder:IMitglieder[] = [];
+
+    lstMitglieder.push({
+      ID: 1,
+      Vorname: 'Reinhard',
+      Nachname: 'Albrecht',
+      Display: 'Albrecht, Reinhard',
+      Spitzname: 'Hase'
+    });
+
+    lstMitglieder.push({
+      ID: 2,
+      Vorname: 'Jürgen',
+      Nachname: 'Roßmann',
+      Display: 'Roßmann, Jürgen',
+      Spitzname: ''
+    });
+
+    lstMitglieder.push({
+      ID: 3,
+      Vorname: 'Rainer',
+      Nachname: 'Schmidt',
+      Display: 'Schmidt, Rainer',
+      Spitzname: ''
+    });
+    
+    lstMitglieder.push({
+      ID: 4,
+      Vorname: 'Wolfgang',
+      Nachname: 'Schmidt',
+      Display: 'Schmidt, Wolfgang',
+      Spitzname: 'Wolle'
+    });
+    
+    lstMitglieder.push({
+      ID: 5,
+      Vorname: 'Thorsten',
+      Nachname: 'Schröer',
+      Display: 'Schröer, Thorsten',
+      Spitzname: 'Thor'
+    });
+    return lstMitglieder;
+  }
 }
 
 

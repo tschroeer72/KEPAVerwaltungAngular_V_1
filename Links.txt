@@ -24,6 +24,8 @@ http://ui-grid.info/
 ------------
 https://developer.mescius.com/wijmo/docs/GettingStarted/QuickStart/QuickStart-Angular
 
+https://developer.mescius.com/wijmo/demos/Grid
+
 npm install @mescius/wijmo.angular2.all
 
 Mescius Wijmo Enterprise Distribution Key
