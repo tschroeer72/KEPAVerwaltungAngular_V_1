@@ -1,1 +1,63 @@
-<p>spieleingabe works!</p>
+<div class="container-fluid text-center">
+    <div class="row justify-content-center gx-2">
+        <mat-card appearance="outlined" class="p-1">
+            <mat-card-header>  
+                <mat-card-title>Eingabe</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-stepper [linear]="true" #stepper>
+                    <mat-step label="Auswahl des Spieltages">
+                        <p>Spieltag</p>
+                        <div>
+                            <button mat-button matStepperNext>Next</button>
+                        </div>
+                    </mat-step>
+                    <mat-step label="Eingabe">
+                        <p>Eingabe</p>
+                        <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                        </div>
+                    </mat-step>
+                </mat-stepper>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="row justify-content-center gx-2 mt-2">
+        <mat-card appearance="outlined" class="p-1">
+            <mat-card-header>  
+                <mat-card-title>Ausgabe</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-tab-group animationDuration="1000ms">
+                    <mat-tab label="9er/Ratten">
+                        <p>Inhalt</p>
+                    </mat-tab>
+
+                    <mat-tab label="6 Tage Rennen">
+                        <p>Inhalt</p>
+                    </mat-tab>
+
+                    <mat-tab label="Pokal">
+                        <p>Inhalt</p>
+                    </mat-tab>
+
+                    <mat-tab label="Kombimeisterschaft">
+                        <p>Inhalt</p>
+                    </mat-tab>
+
+                    <mat-tab label="Sargkegeln">
+                        <p>Inhalt</p>
+                    </mat-tab>
+
+                    <mat-tab label="Meisterschaft">
+                        <p>Inhalt</p>
+                    </mat-tab>
+
+                    <mat-tab label="Blitztunier">
+                        <p>Inhalt</p>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-card-content>
+    </mat-card>
+    </div>
+</div>

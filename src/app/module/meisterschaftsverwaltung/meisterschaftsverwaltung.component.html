@@ -1,46 +1,6 @@
 <div class="container-fluid text-center">
     <div class="row justify-content-center gx-2">
         <div class="col col-5">
-            <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-                <ng-container matColumnDef="ID">
-                <th mat-header-cell *matHeaderCellDef> ID </th>
-                <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="Bezeichnung">
-                <th mat-header-cell *matHeaderCellDef> Bezeichnung </th>
-                <td mat-cell *matCellDef="let element"> {{element.Bezeichnung}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="Beginn">
-                <th mat-header-cell *matHeaderCellDef> Beginn </th>
-                <td mat-cell *matCellDef="let element"> {{element.Beginn | date:'dd.MM.yyyy':'de-DE'}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="Ende">
-                <th mat-header-cell *matHeaderCellDef> Ende </th>
-                <td mat-cell *matCellDef="let element"> {{element.Ende | date:'dd.MM.yyyy':'de-DE'}} </td>
-                </ng-container>
-                
-                <ng-container matColumnDef="MeisterschaftstypID">
-                    <th mat-header-cell *matHeaderCellDef> MeisterschaftstypID </th>
-                    <td mat-cell *matCellDef="let element"> {{element.MeisterschaftstypID}} </td>
-                </ng-container>
-                
-                <ng-container matColumnDef="Meisterschaftstyp">
-                    <th mat-header-cell *matHeaderCellDef> Meisterschaftstyp </th>
-                    <td mat-cell *matCellDef="let element"> {{element.Meisterschaftstyp}} </td>
-                </ng-container>
-                
-                <ng-container matColumnDef="Aktiv">
-                    <th mat-header-cell *matHeaderCellDef> Aktiv </th>
-                    <td mat-cell *matCellDef="let element"> {{element.Aktiv}} </td>
-                </ng-container>
-            
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table> -->
-            
             <mat-card appearance="outlined" class="p-1">
                 <!-- ['ID', 'Bezeichnung', 'Beginn', 'Ende', 'MeisterschaftstypID', 'Meisterschaftstyp', 'Aktiv']; -->
                 <wj-flex-grid #fgMeisterschaften [itemsSource]="fgDataMeisterschaften" (initialized)="fgMeisterschaftenInit()" (selectionChanged)="fgMeisterschaftenSelectedRow()"> 
