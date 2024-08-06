@@ -5,18 +5,41 @@
                 <mat-card-title>Eingabe</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <mat-stepper [linear]="true" #stepper>
-                    <mat-step label="Auswahl des Spieltages">
-                        <p>Spieltag</p>
-                        <div>
-                            <button mat-button matStepperNext>Next</button>
+                <mat-stepper  #stepper>
+                    <mat-step [stepControl]="formGroupSpieltag" errorMessage="Spieltag nicht ausgewählt!">
+                        <div class="row justify-content-center ">
+                            <div class="col col-3">
+                                <form [formGroup]="formGroupSpieltag">
+                                    <ng-template matStepLabel>Auswahl des Spieltages</ng-template>                            
+                                    <!-- <mat-calendar class="col-3" [(selected)]="selectedSpieltag" formControlName="ctlSpieltag" required></mat-calendar> -->
+                                    <mat-calendar 
+                                        [selected]="formGroupSpieltag.get('ctlSpieltag')?.value" 
+                                        (selectedChange)="updateSelectedSpieltag($event)" 
+                                        formControlName="ctlSpieltag" 
+                                        >
+                                    </mat-calendar>
+                                    
+                                    <!-- <p>Selected date: {{selectedSpieltag() | date:"dd.MM.yyyy"}}</p> -->
+                                    <div>
+                                        <button mat-button matStepperNext>Weiter</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </mat-step>
-                    <mat-step label="Eingabe">
-                        <p>Eingabe</p>
-                        <div>
-                            <button mat-button matStepperPrevious>Back</button>
-                        </div>
+                    <mat-step [stepControl]="formGroupEingabe" errorMessage="Error">
+                        <form [formGroup]="formGroupEingabe">
+                            <ng-template matStepLabel>Eingabe</ng-template>
+                            <mat-form-field>
+                                <mat-label>Spieltag</mat-label>
+                                <input matInput [matDatepicker]="picker" [value]="selectedSpieltag.value" disabled="true" required>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            <div>
+                                <button mat-button matStepperPrevious>Zurück</button>
+                            </div>
+                        </form>
                     </mat-step>
                 </mat-stepper>
             </mat-card-content>
