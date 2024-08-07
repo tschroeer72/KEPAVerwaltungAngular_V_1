@@ -17,7 +17,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
-import { WjGridModule, WjFlexGrid } from '@mescius/wijmo.angular2.grid';
+import { WjGridModule } from '@mescius/wijmo.angular2.grid';
 
 @NgModule({
   declarations: [

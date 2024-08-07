@@ -5,7 +5,7 @@
                 <mat-card-title>Eingabe</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <mat-stepper  #stepper>
+                <mat-stepper  #stepper> <!-- [linear]="true" -->
                     <mat-step [stepControl]="formGroupSpieltag" errorMessage="Spieltag nicht ausgewählt!">
                         <div class="row justify-content-center ">
                             <div class="col col-3">
@@ -29,13 +29,46 @@
                     </mat-step>
                     <mat-step [stepControl]="formGroupEingabe" errorMessage="Error">
                         <form [formGroup]="formGroupEingabe">
-                            <ng-template matStepLabel>Eingabe</ng-template>
-                            <mat-form-field>
-                                <mat-label>Spieltag</mat-label>
-                                <input matInput [matDatepicker]="picker" [value]="selectedSpieltag.value" disabled="true" required>
-                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
+                            <div class="row">
+                                <div class="col">
+                                    <ng-template matStepLabel>Eingabe der Spielergebnisse</ng-template>
+                                    <mat-form-field class="me-2">
+                                        <mat-label>Spieltag</mat-label>
+                                        <input matInput [matDatepicker]="picker" [value]="selectedSpieltag.value" disabled="true" required>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Spielauswahl</mat-label>
+                                        <mat-select formControlName="ctlSpielauswahl" (selectionChange)="selectedSpielauswahl()">
+                                        <mat-option value="1">9er/Ratten</mat-option>
+                                        <mat-option value="2">6-Tage-Rennen</mat-option>
+                                        <mat-option value="3">Pokal</mat-option>
+                                        <mat-option value="4">Kombimeisterschaft</mat-option>
+                                        <mat-option value="5">Sargkegeln</mat-option>
+                                        <mat-option value="6">Meisterschaft</mat-option>
+                                        <mat-option value="7">Blitztunier</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col col-3">
+                                        <mat-label>Aktive Mitglieder</mat-label>
+                                        <wj-flex-grid id="fgAktiveMitglieder" #fgAktiveMitglieder [itemsSource]="fgDataAktiveMitglieder" (initialized)="fgAktiveMitgliederInit()" (selectionChanged)="fgAktiveMitgliederSelectedRow()"> 
+                                            <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
+                                            <wj-flex-grid-column [header]="'Vorname'" [binding]="'Vorname'" [align]="'left'" ></wj-flex-grid-column> 
+                                            <wj-flex-grid-column [header]="'Nachname'" [binding]="'Nachname'" [align]="'left'"></wj-flex-grid-column> 
+                                            <wj-flex-grid-column [header]="'Spitzname'" [binding]="'Spitzname'" [align]="'left'"></wj-flex-grid-column> 
+                                        </wj-flex-grid>     
+                                    </div>
+                                    <div class="col col-4">
+                                        <mat-label>Eingabe</mat-label>
+                                        <wj-flex-grid id="fgEingabe" #fgEingabe [itemsSource]="fgDataEingabe"> 
+                                            <!-- <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column>  -->
+                                        </wj-flex-grid>     
+                                    </div>
+                                </div>
+                            </div>
                             <div>
                                 <button mat-button matStepperPrevious>Zurück</button>
                             </div>

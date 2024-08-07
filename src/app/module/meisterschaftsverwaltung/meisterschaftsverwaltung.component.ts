@@ -184,6 +184,7 @@ export class MeisterschaftsverwaltungComponent {
 
   fgMeisterschaftenInit = () => {
     //console.log(this.fgMeisterschaften);
+    this.fgMeisterschaften.showSort = true;
     this.fgMeisterschaften.autoSizeColumns(0, 6);
     //this.fgMeisterschaften.columns[1].align = 'left';
   }

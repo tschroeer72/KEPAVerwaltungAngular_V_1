@@ -12,6 +12,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+
+import { WjGridModule } from '@mescius/wijmo.angular2.grid';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import {MatInputModule} from '@angular/material/input';
     CommonModule,
     SpieleingabeRoutingModule,FormsModule, ReactiveFormsModule,
 
-    MatCardModule,MatTabsModule,MatStepperModule,MatButtonModule,MatDatepickerModule,MatFormFieldModule,MatInputModule
+    MatCardModule,MatTabsModule,MatStepperModule,MatButtonModule,MatDatepickerModule,MatFormFieldModule,MatInputModule,MatSelectModule,
+
+    WjGridModule
   ]
 })
 export class SpieleingabeModule { }
