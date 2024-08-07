@@ -196,7 +196,7 @@ export class SpieleingabeComponent {
   }
 
   updateSelectedSpieltag(value: any){
-    console.log(value);
+    //console.log(value);
     this.formGroupSpieltag.get('ctlSpieltag')?.setValue(value);
   }
 

@@ -12,7 +12,7 @@
                                 <form [formGroup]="formGroupSpieltag">
                                     <ng-template matStepLabel>Auswahl des Spieltages</ng-template>                            
                                     <!-- <mat-calendar class="col-3" [(selected)]="selectedSpieltag" formControlName="ctlSpieltag" required></mat-calendar> -->
-                                    <mat-calendar 
+                                    <mat-calendar ngDefaultControl 
                                         [selected]="formGroupSpieltag.get('ctlSpieltag')?.value" 
                                         (selectedChange)="updateSelectedSpieltag($event)" 
                                         formControlName="ctlSpieltag" 
