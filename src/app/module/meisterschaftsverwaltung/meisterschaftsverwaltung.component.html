@@ -3,7 +3,11 @@
         <div class="col col-5">
             <mat-card appearance="outlined" class="p-1">
                 <!-- ['ID', 'Bezeichnung', 'Beginn', 'Ende', 'MeisterschaftstypID', 'Meisterschaftstyp', 'Aktiv']; -->
-                <wj-flex-grid #fgMeisterschaften [itemsSource]="fgDataMeisterschaften" (initialized)="fgMeisterschaftenInit()" (selectionChanged)="fgMeisterschaftenSelectedRow()"> 
+                <wj-flex-grid #fgMeisterschaften 
+                    [itemsSource]="fgDataMeisterschaften" 
+                    (initialized)="fgMeisterschaftenInit()" 
+                    (selectionChanged)="fgMeisterschaftenSelectedRow()"
+                    [isReadOnly]="true"> 
                     <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
                     <wj-flex-grid-column [header]="'Bezeichnung'" [binding]="'Bezeichnung'" [align]="'left'" ></wj-flex-grid-column> 
                     <wj-flex-grid-column [header]="'Beginn'" [binding]="'Beginn'" format="dd.MM.yyyy"  [align]="'left'"></wj-flex-grid-column> 
@@ -69,7 +73,11 @@
                             <mat-tab label="Teilnehmer">
                                 <div class="row mt-3">
                                     <mat-label>Aktive Mitglieder</mat-label>
-                                    <wj-flex-grid id="fgAktiveMitglieder" #fgAktiveMitglieder [itemsSource]="fgDataAktiveMitglieder" (initialized)="fgAktiveMitgliederInit()" (selectionChanged)="fgAktiveMitgliederSelectedRow()"> 
+                                    <wj-flex-grid id="fgAktiveMitglieder" #fgAktiveMitglieder 
+                                        [itemsSource]="fgDataAktiveMitglieder" 
+                                        (initialized)="fgAktiveMitgliederInit()" 
+                                        (selectionChanged)="fgAktiveMitgliederSelectedRow()"
+                                        [isReadOnly]="true"> 
                                         <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
                                         <wj-flex-grid-column [header]="'Vorname'" [binding]="'Vorname'" [align]="'left'" ></wj-flex-grid-column> 
                                         <wj-flex-grid-column [header]="'Nachname'" [binding]="'Nachname'" [align]="'left'"></wj-flex-grid-column> 
@@ -78,7 +86,11 @@
                                 </div>
                                 <div class="row mt-3">
                                     <mat-label>Aktive Teilnemer</mat-label>
-                                    <wj-flex-grid id="fgTeilnehmer" #fgTeilnehmer [itemsSource]="fgDataTeilnemer" (initialized)="fgTeilnehmerInit()" (selectionChanged)="fgTeilnehmerSelectedRow()"> 
+                                    <wj-flex-grid id="fgTeilnehmer" #fgTeilnehmer 
+                                        [itemsSource]="fgDataTeilnemer" 
+                                        (initialized)="fgTeilnehmerInit()" 
+                                        (selectionChanged)="fgTeilnehmerSelectedRow()"
+                                        [isReadOnly]="true"> 
                                         <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
                                         <wj-flex-grid-column [header]="'MitgliederID'" [binding]="'MitgliederID'" [visible]="false"></wj-flex-grid-column> 
                                         <wj-flex-grid-column [header]="'MeisterschaftID'" [binding]="'MeisterschaftID'" [visible]="false"></wj-flex-grid-column> 

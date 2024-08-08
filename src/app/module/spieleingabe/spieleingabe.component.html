@@ -54,7 +54,11 @@
                                 <div class="row justify-content-center">
                                     <div class="col col-3">
                                         <mat-label>Aktive Mitglieder</mat-label>
-                                        <wj-flex-grid id="fgAktiveMitglieder" #fgAktiveMitglieder [itemsSource]="fgDataAktiveMitglieder" (initialized)="fgAktiveMitgliederInit()" (selectionChanged)="fgAktiveMitgliederSelectedRow()"> 
+                                        <wj-flex-grid id="fgAktiveMitglieder" #fgAktiveMitglieder 
+                                            [itemsSource]="fgDataAktiveMitglieder" 
+                                            (initialized)="fgAktiveMitgliederInit()" 
+                                            (selectionChanged)="fgAktiveMitgliederSelectedRow()"
+                                            [isReadOnly]="true"> 
                                             <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
                                             <wj-flex-grid-column [header]="'Vorname'" [binding]="'Vorname'" [align]="'left'" ></wj-flex-grid-column> 
                                             <wj-flex-grid-column [header]="'Nachname'" [binding]="'Nachname'" [align]="'left'"></wj-flex-grid-column> 

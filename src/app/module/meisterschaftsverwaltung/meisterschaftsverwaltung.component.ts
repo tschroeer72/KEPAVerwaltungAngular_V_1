@@ -56,6 +56,10 @@ export class MeisterschaftsverwaltungComponent {
     this.meisterschaftdetailsForm.controls['Aktiv'].disable();
 
     this.teilnehmerID = 0;
+
+    // this.fgMeisterschaften.isReadOnly = true;
+    // this.fgAktiveMitglieder.isReadOnly = true;
+    // this.fgTeilnehmer.isReadOnly = true;
   }
 
   ngAfterViewInit(){
@@ -185,34 +189,38 @@ export class MeisterschaftsverwaltungComponent {
   fgMeisterschaftenInit = () => {
     //console.log(this.fgMeisterschaften);
     this.fgMeisterschaften.showSort = true;
-    this.fgMeisterschaften.autoSizeColumns(0, 6);
+    this.fgMeisterschaften.autoSizeColumns(0, this.fgMeisterschaften.columns.length - 1);
     //this.fgMeisterschaften.columns[1].align = 'left';
   }
 
   fgMeisterschaftenSelectedRow = () => {
-    const row:IMeisterschaftenliste = this.fgMeisterschaften.selectedRows[0].dataItem;
+    if(this.fgMeisterschaften.selectedRows.length > 0){
+      const row:IMeisterschaftenliste = this.fgMeisterschaften.selectedRows[0].dataItem;
 
-    console.log(row);
-    this.meisterschaftdetailsForm.patchValue(row);
+      console.log(row);
+      this.meisterschaftdetailsForm.patchValue(row);
+    }
   }
   
   fgAktiveMitgliederInit = () => {
-    this.fgAktiveMitglieder.autoSizeColumns(0, 3);
+    this.fgAktiveMitglieder.autoSizeColumns(0, this.fgAktiveMitglieder.columns.length - 1);
   }
 
   fgAktiveMitgliederSelectedRow = () => {
-    const row:IMitglieder = this.fgAktiveMitglieder.selectedRows[0].dataItem;
-
-    //console.log(row);
+    if(this.fgAktiveMitglieder.selectedRows.length > 0){
+      const row:IMitglieder = this.fgAktiveMitglieder.selectedRows[0].dataItem;
+      //console.log(row);
+    }
   }
   
   fgTeilnehmerInit = () => {
-    this.fgTeilnehmer.autoSizeColumns(0, 6);
+    this.fgTeilnehmer.autoSizeColumns(0, this.fgTeilnehmer.columns.length - 1);
   }
 
   fgTeilnehmerSelectedRow = () => {
-    const row:ITeilnehmer = this.fgTeilnehmer?.selectedRows[0].dataItem;
-
-    //console.log(row);
+    if(this.fgTeilnehmer?.selectedRows.length > 0){
+      const row:ITeilnehmer = this.fgTeilnehmer?.selectedRows[0].dataItem;
+      //console.log(row);
+    }
   }
 }
