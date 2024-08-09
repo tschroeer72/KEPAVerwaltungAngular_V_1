@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, viewChild, ViewChild} from '@angular/core';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
@@ -10,6 +10,8 @@ import * as wjcCore from '@mescius/wijmo';
 import { IMitglieder } from '../../interfaces/imitglieder';
 import { MitgliederserviceService } from '../../services/mitgliederservice.service';
 import { SpieleingabeService } from '../../services/spieleingabe.service';
+import { I6TageRennenAusgabe, I6TageRennenEingabe, IBlitztunierAusgabe, IBlitztunierEingabe, IKombimeisterschaftAusgabe, IKombimeisterschaftEingabe, IMeisterschaftAusgabe, IMeisterschaftEingabe, INeunerRattenAusgabe, INeunerRattenEingabe, IPokalAusgabe, IPokalEingabe, ISargkegelnAusgabe, ISargkegelnEingabe } from '../../interfaces/spieleingabe';
+import { HinRueckrunde } from '../../enums/hinrueckrunde';
 
 @Component({
   selector: 'app-spieleingabe',
@@ -36,7 +38,29 @@ export class SpieleingabeComponent {
 
   fgDataEingabe:any[];
   @ViewChild('fgEingabe') fgEingabe!: WjFlexGrid;
-  
+  rowID: number;
+
+  fgDataAusgabe9erRatten:INeunerRattenAusgabe[];
+  @ViewChild('fgAusgabe9erRatten') fgAusgabe9erRatten!: WjFlexGrid;
+
+  fgDataAusgabe6TageRennen:I6TageRennenAusgabe[];
+  @ViewChild('fgAusgabe6TageRennen') fgAusgabe6TageRennen!: WjFlexGrid;
+
+  fgDataAusgabePokal:IPokalAusgabe[];
+  @ViewChild('fgAusgabePokal') fgAusgabePokal!: WjFlexGrid;
+
+  fgDataAusgabeKombimeisterschaft:IKombimeisterschaftAusgabe[];
+  @ViewChild('fgAusgabeKombimeisterschaft') fgAusgabeKombimeisterschaft!: WjFlexGrid;
+
+  fgDataAusgabeSargkegeln:ISargkegelnAusgabe[];
+  @ViewChild('fgAusgabeSargkegeln') fgAusgabeSargkegeln!: WjFlexGrid;
+
+  fgDataAusgabeMeisterschaft:IMeisterschaftAusgabe[];
+  @ViewChild('fgAusgabeMeisterschaft') fgAusgabeMeisterschaft!: WjFlexGrid;
+
+  fgDataAusgabeBlitztunier:IBlitztunierAusgabe[];
+  @ViewChild('fgAusgabeBlitztunier') fgAusgabeBlitztunier!: WjFlexGrid;
+
   selectedSpieltag = new FormControl('', [Validators.required]);
   formGroupSpieltag = this._formBuilder.group({
     //ctlSpieltag: ['', Validators.required],
@@ -57,9 +81,18 @@ export class SpieleingabeComponent {
 
     this.fgDataAktiveMitglieder = mitgliederService.GetAktiveMitglieder();
     this.fgDataEingabe = [];
+    this.rowID = 0;
     //this.fgAktiveMitglieder.allowAddNew = false;
     //this.fgAktiveMitglieder.allowDelete = false;
     //this.fgAktiveMitglieder.isReadOnly = true;
+
+    this.fgDataAusgabe9erRatten = [];
+    this.fgDataAusgabe6TageRennen = [];
+    this.fgDataAusgabePokal = [];
+    this.fgDataAusgabeKombimeisterschaft = [];
+    this.fgDataAusgabeSargkegeln = [];
+    this.fgDataAusgabeMeisterschaft = [];
+    this.fgDataAusgabeBlitztunier = [];
   }
     
   ngAfterViewInit(){
@@ -116,7 +149,7 @@ export class SpieleingabeComponent {
     this.fgEingabe.columns.push(colSpieler1ID);
 
     var colSpieler1 = new wjcGrid.Column();
-    colSpieler1.binding = 'Spieler1Name';
+    colSpieler1.binding = 'SpielerName1';
     colSpieler1.header = 'Spieler 1 Name';
     this.fgEingabe.columns.push(colSpieler1);
 
@@ -126,7 +159,7 @@ export class SpieleingabeComponent {
     this.fgEingabe.columns.push(colSpieler2ID);
 
     var colSpieler2 = new wjcGrid.Column();
-    colSpieler2.binding = 'Spieler2Name';
+    colSpieler2.binding = 'SpielerName2';
     colSpieler2.header = 'Spieler 2 Name';
     this.fgEingabe.columns.push(colSpieler2);
 
@@ -180,23 +213,23 @@ export class SpieleingabeComponent {
     this.fgEingabe.columns.push(colID);
 
     var colSpieler1ID = new wjcGrid.Column();
-    colSpieler1ID.binding = 'Spieler1ID';
-    colSpieler1ID.header = 'Spieler1ID';
+    colSpieler1ID.binding = 'SpielerID1';
+    colSpieler1ID.header = 'SpielerID1';
     this.fgEingabe.columns.push(colSpieler1ID);
 
     var colSpieler1 = new wjcGrid.Column();
-    colSpieler1.binding = 'Spieler1Name';
-    colSpieler1.header = 'Spieler 1 Name';
+    colSpieler1.binding = 'SpielerName1';
+    colSpieler1.header = 'SpielerName1';
     this.fgEingabe.columns.push(colSpieler1);
 
     var colSpieler2ID = new wjcGrid.Column();
-    colSpieler2ID.binding = 'Spieler2ID';
-    colSpieler2ID.header = 'Spieler2ID';
+    colSpieler2ID.binding = 'SpielerID2';
+    colSpieler2ID.header = 'SpielerID2';
     this.fgEingabe.columns.push(colSpieler2ID);
 
     var colSpieler2 = new wjcGrid.Column();
-    colSpieler2.binding = 'Spieler2Name';
-    colSpieler2.header = 'Spieler 2 Name';
+    colSpieler2.binding = 'SpielerName2';
+    colSpieler2.header = 'SpielerName2';
     this.fgEingabe.columns.push(colSpieler2);
 
     var colSpieler1Punkte3bis8 = new wjcGrid.Column();
@@ -264,23 +297,23 @@ export class SpieleingabeComponent {
     this.fgEingabe.columns.push(colID);
 
     var colSpieler1ID = new wjcGrid.Column();
-    colSpieler1ID.binding = 'Spieler1ID';
-    colSpieler1ID.header = 'Spieler1ID';
+    colSpieler1ID.binding = 'SpielerID1';
+    colSpieler1ID.header = 'SpielerID1';
     this.fgEingabe.columns.push(colSpieler1ID);
 
     var colSpieler1 = new wjcGrid.Column();
-    colSpieler1.binding = 'Spieler1Name';
-    colSpieler1.header = 'Spieler 1 Name';
+    colSpieler1.binding = 'SpielerName1';
+    colSpieler1.header = 'SpielerName1';
     this.fgEingabe.columns.push(colSpieler1);
 
     var colSpieler2ID = new wjcGrid.Column();
-    colSpieler2ID.binding = 'Spieler2ID';
-    colSpieler2ID.header = 'Spieler2ID';
+    colSpieler2ID.binding = 'SpielerID2';
+    colSpieler2ID.header = 'SpielerID2';
     this.fgEingabe.columns.push(colSpieler2ID);
 
     var colSpieler2 = new wjcGrid.Column();
-    colSpieler2.binding = 'Spieler2Name';
-    colSpieler2.header = 'Spieler 2 Name';
+    colSpieler2.binding = 'SpielerName2';
+    colSpieler2.header = 'SpielerName2';
     this.fgEingabe.columns.push(colSpieler2);
 
     var colHolzSpieler1 = new wjcGrid.Column();
@@ -311,23 +344,23 @@ export class SpieleingabeComponent {
     this.fgEingabe.columns.push(colID);
 
     var colSpieler1ID = new wjcGrid.Column();
-    colSpieler1ID.binding = 'Spieler1ID';
-    colSpieler1ID.header = 'Spieler1ID';
+    colSpieler1ID.binding = 'SpielerID1';
+    colSpieler1ID.header = 'SpielerID1';
     this.fgEingabe.columns.push(colSpieler1ID);
 
     var colSpieler1 = new wjcGrid.Column();
-    colSpieler1.binding = 'Spieler1Name';
-    colSpieler1.header = 'Spieler 1 Name';
+    colSpieler1.binding = 'SpielerName1';
+    colSpieler1.header = 'SpielerName1';
     this.fgEingabe.columns.push(colSpieler1);
 
     var colSpieler2ID = new wjcGrid.Column();
-    colSpieler2ID.binding = 'Spieler2ID';
-    colSpieler2ID.header = 'Spieler2ID';
+    colSpieler2ID.binding = 'SpielerID2';
+    colSpieler2ID.header = 'SpielerID2';
     this.fgEingabe.columns.push(colSpieler2ID);
 
     var colSpieler2 = new wjcGrid.Column();
-    colSpieler2.binding = 'Spieler2Name';
-    colSpieler2.header = 'Spieler 2 Name';
+    colSpieler2.binding = 'SpielerName2';
+    colSpieler2.header = 'SpielerName2';
     this.fgEingabe.columns.push(colSpieler2);
 
     var colPunkteSpieler1 = new wjcGrid.Column();
@@ -415,7 +448,7 @@ export class SpieleingabeComponent {
       if (ht.cellType == wjcGrid.CellType.RowHeader) {
           s.select(new wjcGrid.CellRange(ht.row, 0, ht.row, s.columns.length - 1));
           if(e.dataTransfer != null) {
-            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.effectAllowed = 'copy';
             e.dataTransfer.setData('text', ht.row.toString());
           }          
       };
@@ -428,7 +461,7 @@ export class SpieleingabeComponent {
         let dragRow = e.dataTransfer?.getData('text');
         if (dragRow != null) {
           if(e.dataTransfer != null) { 
-            e.dataTransfer.dropEffect = 'move';
+            e.dataTransfer.dropEffect = 'copy';
             e.preventDefault();
           }
         }
@@ -437,37 +470,281 @@ export class SpieleingabeComponent {
       let dragRow = e.dataTransfer?.getData('text');
       if (dragRow != null) {
         //AddTeilnehmer
-        // if(s === this.fgTeilnehmer){
-        //   const rowIndex:number = parseInt(dragRow);
-        //   const item:IMitglieder = this.fgAktiveMitglieder.rows[rowIndex].dataItem;
-        //   //alert('thanks for dropping row ' + JSON.stringify(item) + ' here.');
-        //   //console.log('thanks for dropping row ' + JSON.stringify(item) + ' here.');
-        //   this._Addteilnehmer(rowIndex);
-        //   e.preventDefault();
-        // }
+        if(s === this.fgEingabe){
+          const rowIndex:number = parseInt(dragRow);
+          //const item:IMitglieder = this.fgAktiveMitglieder.rows[rowIndex].dataItem;
+          //alert('thanks for dropping row ' + JSON.stringify(item) + ' here.');
+          //console.log('thanks for dropping row ' + JSON.stringify(item) + ' here.');
+          this._Addteilnehmer(rowIndex);
+          e.preventDefault();
+        }
 
         //DelTeilnehmer
-        // if(s === this.fgAktiveMitglieder){
-        //   const rowIndex:number = parseInt(dragRow);
-        //   const item:ITeilnehmer = this.fgTeilnehmer.rows[rowIndex].dataItem;
-        //   //alert('thanks for dropping row ' + JSON.stringify(item) + ' here.');
-        //   //console.log('thanks for dropping row ' + JSON.stringify(item) + ' here.');
-        //   this._DelTeilnehmer(rowIndex);
-        //   e.preventDefault();
-        // }
+        if(s === this.fgAktiveMitglieder){
+          const rowIndex:number = parseInt(dragRow);
+          //const item:ITeilnehmer = this.fgTeilnehmer.rows[rowIndex].dataItem;
+          //alert('thanks for dropping row ' + JSON.stringify(item) + ' here.');
+          //console.log('thanks for dropping row ' + JSON.stringify(item) + ' here.');
+          this._DelTeilnehmer(rowIndex);
+          e.preventDefault();
+        }
       }
     }, true);
   }
   
+  private _Addteilnehmer(rowIndex:number){
+    // console.log('AddTeilnehmer');
+    const item:IMitglieder = this.fgAktiveMitglieder.rows[rowIndex].dataItem;
+    // console.log('rowIndex = ' + rowIndex);
+    // console.log(item);
+
+    this.rowID++;
+
+    switch(this.selectedSpiel.value){
+      //9er/Ratten
+      case '1': {
+        let nr:INeunerRattenEingabe = {
+          ID: this.rowID,
+          SpielerID: item.ID,
+          SpielerName: item.Display,
+          Neuner: 0,
+          Ratten: 0
+        }
+        this.fgDataEingabe.push(nr);
+        break;
+      }
+      //6-Tage-Rennen
+      case '2': {
+        if(this.fgEingabe.rows.length === 0){
+          let rennen:I6TageRennenEingabe = {
+            ID: this.rowID,
+            Spieler1ID: item.ID,
+            SpielerName1: item.Display,
+            Spieler2ID: -1,
+            SpielerName2: '',
+            Runden: 0,
+            Punkte: 0
+          }
+          this.fgDataEingabe.push(rennen);
+        }
+        else {
+          let lastRow:I6TageRennenEingabe = this.fgEingabe.rows[this.fgEingabe.rows.length - 1].dataItem;
+          if(lastRow.Spieler2ID === -1) {
+            lastRow.Spieler2ID = item.ID;
+            lastRow.SpielerName2 = item.Display;
+          }
+          else {
+            let rennen:I6TageRennenEingabe = {
+              ID: this.rowID,
+              Spieler1ID: item.ID,
+              SpielerName1: item.Display,
+              Spieler2ID: -1,
+              SpielerName2: '',
+              Runden: 0,
+              Punkte: 0
+            }
+            this.fgDataEingabe.push(rennen);
+          }
+        }
+        break;
+      }
+      //Pokal
+      case '3': {
+        let pokal:IPokalEingabe = {
+          ID: this.rowID,
+          SpielerID: item.ID,
+          SpielerName: item.Display,
+          Platzierung: 0
+        }
+        this.fgDataEingabe.push(pokal);
+        break;
+      }
+      //Kombimeisterschaft
+      case '4': {
+        if(this.fgEingabe.rows.length === 0){
+          let kombi:IKombimeisterschaftEingabe = {
+            ID: this.rowID,
+            SpielerID1: item.ID,
+            SpielerName1: item.Display,
+            SpielerID2: -1,
+            SpielerName2: '',
+            Spieler1Punkte3bis8: 0,
+            Spieler1Punkte5Kugeln: 0,
+            Spieler2Punkte3bis8: 0,
+            Spieler2Punkte5Kugeln: 0,
+            HinRueckrunde: HinRueckrunde.Hinrunde
+          }
+          this.fgDataEingabe.push(kombi);
+        }
+        else {
+          let lastRow:IKombimeisterschaftEingabe = this.fgEingabe.rows[this.fgEingabe.rows.length - 1].dataItem;
+          if(lastRow.SpielerID2 === -1) {
+            lastRow.SpielerID2 = item.ID;
+            lastRow.SpielerName2 = item.Display;
+          }
+          else {
+            let kombi:IKombimeisterschaftEingabe = {
+              ID: this.rowID,
+              SpielerID1: item.ID,
+              SpielerName1: item.Display,
+              SpielerID2: -1,
+              SpielerName2: '',
+              Spieler1Punkte3bis8: 0,
+              Spieler1Punkte5Kugeln: 0,
+              Spieler2Punkte3bis8: 0,
+              Spieler2Punkte5Kugeln: 0,
+              HinRueckrunde: HinRueckrunde.Hinrunde
+            }
+            this.fgDataEingabe.push(kombi);
+          }
+        }
+        break;
+      }
+      //Sargkegeln
+      case '5': {
+        let sarg:ISargkegelnEingabe = {
+          ID: this.rowID,
+          SpielerID: item.ID,
+          SpielerName: item.Display,
+          Platzierung: 0
+        }
+        this.fgDataEingabe.push(sarg);
+        break;
+      }
+      //Meisterschaft
+      case '6': {
+        if(this.fgEingabe.rows.length === 0){
+          let meister:IMeisterschaftEingabe = {
+            ID: this.rowID,
+            SpielerID1: item.ID,
+            SpielerName1: item.Display,
+            SpielerID2: -1,
+            SpielerName2: '',
+            HolzSpieler1: 0,
+            HolzSpieler2: 0,
+            HinRueckrunde: HinRueckrunde.Hinrunde
+          }
+          this.fgDataEingabe.push(meister);
+        }
+        else {
+          let lastRow:IMeisterschaftEingabe = this.fgEingabe.rows[this.fgEingabe.rows.length - 1].dataItem;
+          if(lastRow.SpielerID2 === -1) {
+            lastRow.SpielerID2 = item.ID;
+            lastRow.SpielerName2 = item.Display;
+          }
+          else {
+            let meister:IMeisterschaftEingabe = {
+              ID: this.rowID,
+              SpielerID1: item.ID,
+              SpielerName1: item.Display,
+              SpielerID2: -1,
+              SpielerName2: '',
+              HolzSpieler1: 0,
+              HolzSpieler2: 0,
+              HinRueckrunde: HinRueckrunde.Hinrunde
+            }
+            this.fgDataEingabe.push(meister);
+          }
+        }
+        break;
+      }
+      //Blitztunier
+      case '7': {
+        if(this.fgEingabe.rows.length === 0){
+          let blitz:IBlitztunierEingabe = {
+            ID: this.rowID,
+            SpielerID1: item.ID,
+            SpielerName1: item.Display,
+            SpielerID2: -1,
+            SpielerName2: '',
+            PunkteSpieler1: 0,
+            PunkteSpieler2: 0,
+            HinRueckrunde: HinRueckrunde.Hinrunde
+          }
+          this.fgDataEingabe.push(blitz);
+        }
+        else {
+          let lastRow:IBlitztunierEingabe = this.fgEingabe.rows[this.fgEingabe.rows.length - 1].dataItem;
+          if(lastRow.SpielerID2 === -1) {
+            lastRow.SpielerID2 = item.ID;
+            lastRow.SpielerName2 = item.Display;
+          }
+          else {
+            let blitz:IBlitztunierEingabe = {
+              ID: this.rowID,
+              SpielerID1: item.ID,
+              SpielerName1: item.Display,
+              SpielerID2: -1,
+              SpielerName2: '',
+              PunkteSpieler1: 0,
+              PunkteSpieler2: 0,
+              HinRueckrunde: HinRueckrunde.Hinrunde
+            }
+            this.fgDataEingabe.push(blitz);
+          }
+        }
+        break;
+      }
+    }
+
+    this.fgEingabe.collectionView.refresh();
+    this.fgEingabe.autoSizeColumns(0, this.fgEingabe.columns.length - 1);
+    
+    // console.table(this.fgDataAktiveMitglieder);
+    //console.table(this.fgDataEingabe);
+  }
+
+  private _DelTeilnehmer(rowIndex:number){
+    const item = this.fgEingabe.rows[rowIndex].dataItem;
+    this.fgDataEingabe = this.fgDataEingabe.filter(itm => itm !== item);
+    this.fgEingabe.collectionView.refresh();
+    this.fgEingabe.autoSizeColumns(0, this.fgEingabe.columns.length - 1);
+    //console.table(this.fgDataEingabe);
+  }
+
   fgAktiveMitgliederInit = () => {
     this.fgAktiveMitglieder.showSort = true;
     this.fgAktiveMitglieder.autoSizeColumns(0, this.fgAktiveMitglieder.columns.length - 1);
   }
 
-  fgAktiveMitgliederSelectedRow = () => {
-    const row:IMitglieder = this.fgAktiveMitglieder.selectedRows[0].dataItem;
+  // fgAktiveMitgliederSelectedRow = () => {
+  //   const row:IMitglieder = this.fgAktiveMitglieder.selectedRows[0].dataItem;
 
-    //console.log(row);
+  //   //console.log(row);
+  // }
+  
+  fgAusgabe9erRattenInit = () => {
+    this.fgAusgabe9erRatten.showSort = true;
+    this.fgAusgabe9erRatten.autoSizeColumns(0, this.fgAusgabe9erRatten.columns.length - 1);
   }
   
+  fgAusgabe6TageRennenInit = () => {
+    this.fgAusgabe6TageRennen.showSort = true;
+    this.fgAusgabe6TageRennen.autoSizeColumns(0, this.fgAusgabe6TageRennen.columns.length - 1);
+  }
+  
+  fgAusgabePokalInit = () => {
+    this.fgAusgabePokal.showSort = true;
+    this.fgAusgabePokal.autoSizeColumns(0, this.fgAusgabePokal.columns.length - 1);
+  }
+  
+  fgAusgabeKombimeisterschaftInit = () => {
+    this.fgAusgabeKombimeisterschaft.showSort = true;
+    this.fgAusgabeKombimeisterschaft.autoSizeColumns(0, this.fgAusgabeKombimeisterschaft.columns.length - 1);
+  }
+  
+  fgAusgabeSargkegelnInit = () => {
+    this.fgAusgabeSargkegeln.showSort = true;
+    this.fgAusgabeSargkegeln.autoSizeColumns(0, this.fgAusgabeSargkegeln.columns.length - 1);
+  }
+  
+  fgAusgabeMeisterschaftInit = () => {
+    this.fgAusgabeMeisterschaft.showSort = true;
+    this.fgAusgabeMeisterschaft.autoSizeColumns(0, this.fgAusgabeMeisterschaft.columns.length - 1);
+  }
+  
+  fgAusgabeBlitztunierInit = () => {
+    this.fgAusgabeBlitztunier.showSort = true;
+    this.fgAusgabeBlitztunier.autoSizeColumns(0, this.fgAusgabeBlitztunier.columns.length - 1);
+  }
 }

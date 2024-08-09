@@ -29,7 +29,7 @@
                     </mat-step>
                     <mat-step [stepControl]="formGroupEingabe" errorMessage="Error">
                         <form [formGroup]="formGroupEingabe">
-                            <div class="row">
+                            <div class="row justify-content-center">
                                 <div class="col">
                                     <ng-template matStepLabel>Eingabe der Spielergebnisse</ng-template>
                                     <mat-form-field class="me-2">
@@ -51,29 +51,33 @@
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
-                                <div class="row justify-content-center">
-                                    <div class="col col-3">
-                                        <mat-label>Aktive Mitglieder</mat-label>
-                                        <wj-flex-grid id="fgAktiveMitglieder" #fgAktiveMitglieder 
-                                            [itemsSource]="fgDataAktiveMitglieder" 
-                                            (initialized)="fgAktiveMitgliederInit()" 
-                                            (selectionChanged)="fgAktiveMitgliederSelectedRow()"
-                                            [isReadOnly]="true"> 
-                                            <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
-                                            <wj-flex-grid-column [header]="'Vorname'" [binding]="'Vorname'" [align]="'left'" ></wj-flex-grid-column> 
-                                            <wj-flex-grid-column [header]="'Nachname'" [binding]="'Nachname'" [align]="'left'"></wj-flex-grid-column> 
-                                            <wj-flex-grid-column [header]="'Spitzname'" [binding]="'Spitzname'" [align]="'left'"></wj-flex-grid-column> 
-                                        </wj-flex-grid>     
-                                    </div>
-                                    <div class="col col-4">
-                                        <mat-label>Eingabe</mat-label>
-                                        <wj-flex-grid id="fgEingabe" #fgEingabe [itemsSource]="fgDataEingabe"> 
-                                            <!-- <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column>  -->
-                                        </wj-flex-grid>     
-                                    </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col col-3">
+                                    <mat-label>Aktive Mitglieder</mat-label>
+                                    <wj-flex-grid id="fgAktiveMitglieder" #fgAktiveMitglieder 
+                                        [itemsSource]="fgDataAktiveMitglieder" 
+                                        (initialized)="fgAktiveMitgliederInit()" 
+                                        [isReadOnly]="true"> 
+                                        <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
+                                        <wj-flex-grid-column [header]="'Vorname'" [binding]="'Vorname'" [align]="'left'" ></wj-flex-grid-column> 
+                                        <wj-flex-grid-column [header]="'Nachname'" [binding]="'Nachname'" [align]="'left'"></wj-flex-grid-column> 
+                                        <wj-flex-grid-column [header]="'Spitzname'" [binding]="'Spitzname'" [align]="'left'"></wj-flex-grid-column> 
+                                    </wj-flex-grid>     
+                                </div>
+                                <div class="col col-9">
+                                    <mat-label>Eingabe</mat-label>
+                                    <wj-flex-grid id="fgEingabe" #fgEingabe [itemsSource]="fgDataEingabe" [autoGenerateColumns]="false"> 
+                                        <!-- <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column>  -->
+                                    </wj-flex-grid>     
                                 </div>
                             </div>
-                            <div>
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <button mat-flat-button disabled="">Speichern</button>
+                                </div>
+                            </div>
+                        <div>
                                 <button mat-button matStepperPrevious>Zurück</button>
                             </div>
                         </form>
@@ -90,31 +94,105 @@
             <mat-card-content>
                 <mat-tab-group animationDuration="1000ms">
                     <mat-tab label="9er/Ratten">
-                        <p>Inhalt</p>
+                        <wj-flex-grid id="fgAusgabe9erRatten" #fgAusgabe9erRatten 
+                                        [itemsSource]="fgDataAusgabe9erRatten" 
+                                        (initialized)="fgAusgabe9erRattenInit()" 
+                                        [isReadOnly]="true"> 
+                            <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerID'" [binding]="'SpielerID'" [align]="'left'" ></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerName'" [binding]="'SpielerName'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Neuner'" [binding]="'Neuner'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Ratten'" [binding]="'Ratten'" [align]="'left'"></wj-flex-grid-column> 
+                        </wj-flex-grid>     
                     </mat-tab>
 
                     <mat-tab label="6 Tage Rennen">
-                        <p>Inhalt</p>
+                        <wj-flex-grid id="fgAusgab6TageRennen" #fgAusgabe6TageRennen 
+                                        [itemsSource]="fgDataAusgabe6TageRennen" 
+                                        (initialized)="fgAusgabe6TageRennenInit()" 
+                                        [isReadOnly]="true"> 
+                            <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Spieler1ID'" [binding]="'Spieler1ID'" [align]="'left'" ></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerName1'" [binding]="'SpielerName1'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Spieler2ID'" [binding]="'Spieler2ID'" [align]="'left'" ></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerName2'" [binding]="'SpielerName2'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Runden'" [binding]="'Runden'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Punkte'" [binding]="'Punkte'" [align]="'left'"></wj-flex-grid-column> 
+                        </wj-flex-grid>     
                     </mat-tab>
 
                     <mat-tab label="Pokal">
-                        <p>Inhalt</p>
+                        <wj-flex-grid id="fgAusgabePokal" #fgAusgabePokal 
+                                        [itemsSource]="fgDataAusgabePokal" 
+                                        (initialized)="fgAusgabePokalInit()" 
+                                        [isReadOnly]="true"> 
+                            <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerID'" [binding]="'SpielerID'" [align]="'left'" ></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerName'" [binding]="'SpielerName'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Platzierung'" [binding]="'Platzierung'" [align]="'left'"></wj-flex-grid-column> 
+                        </wj-flex-grid>     
                     </mat-tab>
 
                     <mat-tab label="Kombimeisterschaft">
-                        <p>Inhalt</p>
+                        <wj-flex-grid id="fgAusgab6TageRennen" #fgAusgabe6TageRennen 
+                                        [itemsSource]="fgDataAusgabe6TageRennen" 
+                                        (initialized)="fgAusgabe6TageRennenInit()" 
+                                        [isReadOnly]="true"> 
+                        <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'SpielerID1'" [binding]="'SpielerID1'" [align]="'left'" ></wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'SpielerName1'" [binding]="'SpielerName1'" [align]="'left'"></wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'SpielerID2'" [binding]="'SpielerID2'" [align]="'left'" ></wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'SpielerName2'" [binding]="'SpielerName2'" [align]="'left'"></wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'Spieler1Punkte3bis8'" [binding]="'Spieler1Punkte3bis8'" [align]="'left'"></wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'Spieler1Punkte5Kugeln'" [binding]="'Spieler1Punkte5Kugeln'" [align]="'left'"></wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'Spieler2Punkte3bis8'" [binding]="'Spieler2Punkte3bis8'" [align]="'left'"></wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'Spieler2Punkte5Kugeln'" [binding]="'Spieler2Punkte5Kugeln'" [align]="'left'"></wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'HinRueckrunde'" [binding]="'HinRueckrunde'" [align]="'left'"></wj-flex-grid-column> 
+                    </wj-flex-grid>     
                     </mat-tab>
 
                     <mat-tab label="Sargkegeln">
-                        <p>Inhalt</p>
+                        <wj-flex-grid id="fgAusgabeSargkegeln" #fgAusgabeSargkegeln 
+                                        [itemsSource]="fgDataAusgabeSargkegeln" 
+                                        (initialized)="fgAusgabeSargkegelnInit()" 
+                                        [isReadOnly]="true"> 
+                            <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerID'" [binding]="'SpielerID'" [align]="'left'" ></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerName'" [binding]="'SpielerName'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Platzierung'" [binding]="'Platzierung'" [align]="'left'"></wj-flex-grid-column> 
+                        </wj-flex-grid>     
                     </mat-tab>
 
                     <mat-tab label="Meisterschaft">
-                        <p>Inhalt</p>
+                        <wj-flex-grid id="fgAusgabMeisterschaft" #fgAusgabeMeisterschaft 
+                                        [itemsSource]="fgDataAusgabeMeisterschaft" 
+                                        (initialized)="fgAusgabeMeisterschaftInit()" 
+                                        [isReadOnly]="true"> 
+                            <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Spieler1ID1'" [binding]="'SpielerID1'" [align]="'left'" ></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerName1'" [binding]="'SpielerName1'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerID2'" [binding]="'SpielerID2'" [align]="'left'" ></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerName2'" [binding]="'SpielerName2'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'HolzSpieler1'" [binding]="'HolzSpieler1'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'HolzSpieler2'" [binding]="'HolzSpieler2'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'HinRueckrunde'" [binding]="'HinRueckrunde'" [align]="'left'"></wj-flex-grid-column> 
+                        </wj-flex-grid>     
                     </mat-tab>
 
                     <mat-tab label="Blitztunier">
-                        <p>Inhalt</p>
+                        <wj-flex-grid id="fgAusgabBlitztunier" #fgAusgabeBlitztunier 
+                                        [itemsSource]="fgDataAusgabeBlitztunier" 
+                                        (initialized)="fgAusgabeBlitztunierInit()" 
+                                        [isReadOnly]="true"> 
+                            <wj-flex-grid-column [header]="'ID'" [binding]="'ID'" [visible]="false"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Spieler1ID1'" [binding]="'SpielerID1'" [align]="'left'" ></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerName1'" [binding]="'SpielerName1'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerID2'" [binding]="'SpielerID2'" [align]="'left'" ></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'SpielerName2'" [binding]="'SpielerName2'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'PunkteSpieler1'" [binding]="'PunkteSpieler1'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'PunkteSpieler2'" [binding]="'PunkteSpieler2'" [align]="'left'"></wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'HinRueckrunde'" [binding]="'HinRueckrunde'" [align]="'left'"></wj-flex-grid-column> 
+                        </wj-flex-grid>     
                     </mat-tab>
                 </mat-tab-group>
             </mat-card-content>
