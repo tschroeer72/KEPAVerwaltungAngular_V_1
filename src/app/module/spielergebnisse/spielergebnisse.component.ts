@@ -78,6 +78,14 @@ export class SpielergebnisseComponent {
     console.log(this.lstSelectedSpieltage.options.filter(f => f.selected).map(m => m.value))
   }
 
+  allDaysSelectedClick = () => {
+    this.lstSelectedSpieltage.selectAll();
+  }
+
+  noDaySelectedClick = () => {
+    this.lstSelectedSpieltage.deselectAll();
+  }
+
   fgAusgabe9erRattenInit = () => {
     this.fgAusgabe9erRatten.showSort = true;
     this.fgAusgabe9erRatten.autoSizeColumns(0, this.fgAusgabe9erRatten.columns.length - 1);
