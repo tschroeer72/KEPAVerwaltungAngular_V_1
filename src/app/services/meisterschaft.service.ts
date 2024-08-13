@@ -34,7 +34,7 @@ import { IMeisterschaftenliste, IMeisterschaftstyp } from '../interfaces/imeiste
 @Injectable({
   providedIn: 'root'
 })
-export class MeisterschaftserviceService {
+export class MeisterschaftService {
   lstMeisterschaften:IMeisterschaftenliste[] = [
   {
     ID: 1,

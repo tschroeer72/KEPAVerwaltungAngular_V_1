@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import { DynamicFlatNode } from '../../interfaces/tvdata';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { MitgliederserviceService, DynamicDataSource } from '../../services/mitgliederservice.service';
+import { MitgliederService, DynamicDataSource } from '../../services/mitglieder.service';
 
 @Component({
   selector: 'app-mitgliederverwaltung',
@@ -17,7 +17,7 @@ export class MitgliederverwaltungComponent {
   hasChild = (_: number, _nodeData: DynamicFlatNode) => _nodeData.expandable;
   isExpandable = (node: DynamicFlatNode) => node.expandable;
 
-  constructor(private mitgliederService: MitgliederserviceService){
+  constructor(private mitgliederService: MitgliederService){
       this.mitgliederPersoenlichesForm = new FormGroup({
       ID: new FormControl({value: '', disabled: true}),
       Vorname: new FormControl('', [Validators.required]),

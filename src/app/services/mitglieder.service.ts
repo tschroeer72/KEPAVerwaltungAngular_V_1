@@ -9,7 +9,7 @@ import { IMitglieder } from '../interfaces/imitglieder';
 @Injectable({
   providedIn: 'root'
 })
-export class MitgliederserviceService {
+export class MitgliederService {
   treeControl: FlatTreeControl<DynamicFlatNode>;
   dataSource: DynamicDataSource;
   getLevel = (node: DynamicFlatNode) => node.level;
